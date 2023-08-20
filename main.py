@@ -81,3 +81,39 @@ for numbers in range(2, 7):
     moveColumnLeft(0, 1)
     print("Moved "+numberToFind+" to: [6,1]\n")
     printMatrix()
+
+for numbers in range(8, 13):
+    if numbers < 10:
+        numberToFind = "0" + str(numbers)
+    else:
+        numberToFind = str(numbers)
+    
+    foundX = -1
+    foundY = -1
+
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[i])):
+            if matrix[i][j] == numberToFind:
+                foundX = j
+                foundY = i
+                print(numberToFind + " found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
+                break
+
+    # move to [0,x]
+
+    if foundX != 0:
+        moveColumnLeft(foundY, foundX)
+        print("Moved "+numberToFind+" to: [1,"+ str(foundY+1) + "]\n")
+        printMatrix()
+
+    # move to [0,1]
+
+    if foundY != 1:
+        moveRowUp(0, foundY-1)
+        print("Moved "+numberToFind+" to: [1,2]\n")
+        printMatrix()
+
+    # move 1 left
+    moveColumnLeft(1, 1)
+    print("Moved "+numberToFind+" to: [6,2]\n")
+    printMatrix()
