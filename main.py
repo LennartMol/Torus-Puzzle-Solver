@@ -16,12 +16,26 @@ def moveRowUp(row, moves):
             matrix[i][row] = matrix[i+1][row]
         matrix[len(matrix)-1][row] = temp
 
+def moveRowDown(row, moves):
+    for noMoves in range(0, moves):
+        temp = matrix[len(matrix)-1][row]
+        for i in range(len(matrix)-1, 0, -1):
+            matrix[i][row] = matrix[i-1][row]
+        matrix[0][row] = temp
+
 def moveColumnLeft(column, moves):
     for noMoves in range(0, moves):
         temp = matrix[column][0]
         for i in range(0, len(matrix)-1):
             matrix[column][i] = matrix[column][i+1]
         matrix[column][len(matrix)-1] = temp
+
+def moveColumnRight(column, moves):
+    for noMoves in range(0, moves):
+        temp = matrix[column][len(matrix)-1]
+        for i in range(len(matrix)-1, 0, -1):
+            matrix[column][i] = matrix[column][i-1]
+        matrix[column][0] = temp
 
 
 def randomizeMatrix():
@@ -110,6 +124,17 @@ for numbers in range(8, 13):
 
     if foundY != 1:
         moveRowUp(0, foundY-1)
+        print("Moved "+numberToFind+" to: [1,2]\n")
+        printMatrix()
+    else:
+        moveRowUp(0, 1)
+        print("Moved "+numberToFind+" to: [1,1]\n")
+        printMatrix()
+
+        moveColumnRight(foundY, foundX)
+        printMatrix()
+
+        moveRowDown(0, 1)
         print("Moved "+numberToFind+" to: [1,2]\n")
         printMatrix()
 
