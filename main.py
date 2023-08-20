@@ -94,28 +94,33 @@ for fixRow in range(0, len(fixRows)):
 
         if foundX != 0:
             moveColumnLeft(foundY, foundX)
-            print("Moved "+numberToFind+" to: ["+str(fixRow)+","+ str(foundY+1) + "]\n")
+            print("Moved "+numberToFind+" to: [1,"+ str(foundY+1) + "]\n")
             printMatrix()
 
         # move to correct row
 
-        if foundY != fixRow:
+        if foundY > fixRow:
             moveRowUp(0, foundY-fixRow)
-            print("Moved "+numberToFind+" to: [1,2]\n")
+            print("Moved "+numberToFind+" to: [1,"+str(fixRow+1)+"]\n")
+            printMatrix()
+        elif foundY < fixRow:
+            moveRowDown(0, fixRow-foundY)
+            print("Moved "+numberToFind+" to: [1,"+str(fixRow+1)+"]\n")
             printMatrix()
         else:
             moveRowUp(0, 1)
-            print("Moved "+numberToFind+" to: [1,1]\n")
+            print("Moved "+numberToFind+" to: [1,"+str(fixRow)+"]\n")
             printMatrix()
 
             moveColumnRight(foundY, foundX)
+            print("Moved column "+str(fixRow+1)+" back\n")
             printMatrix()
 
             moveRowDown(0, 1)
-            print("Moved "+numberToFind+" to: [1,2]\n")
+            print("Moved "+numberToFind+" to: [1,"+str(fixRow+1)+"]\n")
             printMatrix()
 
         # move 1 left
         moveColumnLeft(fixRow, 1)
-        print("Moved "+numberToFind+" to: [6,1]\n")
+        print("Moved "+numberToFind+" to: [6,"+str(fixRow+1)+"]\n")
         printMatrix()
