@@ -40,15 +40,44 @@ def randomizeMatrix():
 randomizeMatrix()
 
 def printMatrix():
-    print()
     for i in range(0, len(matrix)):
         print(matrix[i])
-
+    print()
+print("\nBegin matrix:")
 printMatrix()
 
 
-# find 2 and move to right spot
-for i in range(0, len(matrix)):
-    for j in range(0, len(matrix[i])):
-        if matrix[i][j] == "02":
-            print("2 found at: ", i+1, j+1)
+# find 2 to 6
+
+for numbers in range(2, 7):
+    numberToFind = "0" + str(numbers)
+    
+    foundX = -1
+    foundY = -1
+
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[i])):
+            if matrix[i][j] == numberToFind:
+                foundX = j
+                foundY = i
+                print(numberToFind + " found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
+                break
+
+    # move to [0,x]
+
+    if foundX != 0:
+        moveColumnLeft(foundY, foundX)
+        print("Moved "+numberToFind+" to: [1,"+ str(foundY+1) + "]\n")
+        printMatrix()
+
+    # move to [0,0]
+
+    if foundY != 0:
+        moveRowUp(0, foundY)
+        print("Moved "+numberToFind+" to: [1,1]\n")
+        printMatrix()
+
+    # move 1 left
+    moveColumnLeft(0, 1)
+    print("Moved "+numberToFind+" to: [6,1]\n")
+    printMatrix()
