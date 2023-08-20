@@ -63,82 +63,59 @@ printMatrix()
 
 # find 2 to 6
 
-for numbers in range(2, 7):
-    numberToFind = "0" + str(numbers)
-    
-    foundX = -1
-    foundY = -1
+fixRow1 = range(2,7)
+fixRow2 = range(8,13)
+fixRow3 = range(14,19)
+fixRow4 = range(20,25)
+fixRow5 = range(26,31)
+fixRow6 = range(32,37)
 
-    for i in range(0, len(matrix)):
-        for j in range(0, len(matrix[i])):
-            if matrix[i][j] == numberToFind:
-                foundX = j
-                foundY = i
-                print(numberToFind + " found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
-                break
+fixRows = [fixRow1, fixRow2, fixRow3, fixRow4, fixRow5, fixRow6]
+for fixRow in range(0, len(fixRows)):
 
-    # move to [0,x]
+    for numbers in fixRows[fixRow]:
+        if numbers < 10:
+            numberToFind = "0" + str(numbers)
+        else:
+            numberToFind = str(numbers)
+        
+        foundX = -1
+        foundY = -1
 
-    if foundX != 0:
-        moveColumnLeft(foundY, foundX)
-        print("Moved "+numberToFind+" to: [1,"+ str(foundY+1) + "]\n")
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[i])):
+                if matrix[i][j] == numberToFind:
+                    foundX = j
+                    foundY = i
+                    print(numberToFind + " found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
+                    break
+
+        # move to correct column
+
+        if foundX != 0:
+            moveColumnLeft(foundY, foundX)
+            print("Moved "+numberToFind+" to: ["+str(fixRow)+","+ str(foundY+1) + "]\n")
+            printMatrix()
+
+        # move to correct row
+
+        if foundY != fixRow:
+            moveRowUp(0, foundY-fixRow)
+            print("Moved "+numberToFind+" to: [1,2]\n")
+            printMatrix()
+        else:
+            moveRowUp(0, 1)
+            print("Moved "+numberToFind+" to: [1,1]\n")
+            printMatrix()
+
+            moveColumnRight(foundY, foundX)
+            printMatrix()
+
+            moveRowDown(0, 1)
+            print("Moved "+numberToFind+" to: [1,2]\n")
+            printMatrix()
+
+        # move 1 left
+        moveColumnLeft(fixRow, 1)
+        print("Moved "+numberToFind+" to: [6,1]\n")
         printMatrix()
-
-    # move to [0,0]
-
-    if foundY != 0:
-        moveRowUp(0, foundY)
-        print("Moved "+numberToFind+" to: [1,1]\n")
-        printMatrix()
-
-    # move 1 left
-    moveColumnLeft(0, 1)
-    print("Moved "+numberToFind+" to: [6,1]\n")
-    printMatrix()
-
-for numbers in range(8, 13):
-    if numbers < 10:
-        numberToFind = "0" + str(numbers)
-    else:
-        numberToFind = str(numbers)
-    
-    foundX = -1
-    foundY = -1
-
-    for i in range(0, len(matrix)):
-        for j in range(0, len(matrix[i])):
-            if matrix[i][j] == numberToFind:
-                foundX = j
-                foundY = i
-                print(numberToFind + " found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
-                break
-
-    # move to [0,x]
-
-    if foundX != 0:
-        moveColumnLeft(foundY, foundX)
-        print("Moved "+numberToFind+" to: [1,"+ str(foundY+1) + "]\n")
-        printMatrix()
-
-    # move to [0,1]
-
-    if foundY != 1:
-        moveRowUp(0, foundY-1)
-        print("Moved "+numberToFind+" to: [1,2]\n")
-        printMatrix()
-    else:
-        moveRowUp(0, 1)
-        print("Moved "+numberToFind+" to: [1,1]\n")
-        printMatrix()
-
-        moveColumnRight(foundY, foundX)
-        printMatrix()
-
-        moveRowDown(0, 1)
-        print("Moved "+numberToFind+" to: [1,2]\n")
-        printMatrix()
-
-    # move 1 left
-    moveColumnLeft(1, 1)
-    print("Moved "+numberToFind+" to: [6,2]\n")
-    printMatrix()
