@@ -186,14 +186,40 @@ moveToCorrectColumn("13", 2)
 # move 19 to correct column
 moveToCorrectColumn("19", 3)
 
-# move 25 to correct column
-moveToCorrectColumn("25", 4)
+# switch last two columns
+def switchLastTwoColumns():
+    moveColumnRight(5, 1)
+    printMatrix()
+    moveRowDown(0, 1)
+    printMatrix()
+    moveColumnRight(5, 1)
+    printMatrix()
+    moveRowUp(0, 1)
+    printMatrix()
+    moveColumnRight(5, 1)
+    printMatrix()
+    moveRowDown(0, 1)
+    printMatrix()
+    moveColumnRight(5, 1)
+    printMatrix()
+    moveRowUp(0, 1)
+    printMatrix()
+    moveColumnRight(5, 1)
+    printMatrix()
+    moveRowDown(0, 1)
+    printMatrix()
+    moveColumnRight(5, 1)	
+    printMatrix()
+    moveRowUp(0, 1)
+    printMatrix()
+    moveColumnRight(5, 1)
 
 # print error message when 31 is not in correct column
 foundX, foundY = findNumber("31")
 if foundY != 5:
     print("this bug needs to be fixed")
     printMatrix()
-else:
-    print("Matrix has been solved.")
-    printMatrix()
+    switchLastTwoColumns()
+
+print("Matrix has been solved.")
+printMatrix()
