@@ -155,27 +155,30 @@ def rotateAroundColumn(columnToRotateAround):
     moveRowDown(0, 1)
     moveColumnLeft(columnToRotateAround, 1)
 
-# find 7
-foundX, foundY = findNumber("07")
-positionOf1 = [0,0] 
+def moveToCorrectColumn(numberToMove, correctColumn):
+    foundX, foundY = findNumber(numberToMove)
 
-# if 7 is not in correct place 
-if foundY != 1:
+    # if number is not in correct column
+    if foundY != correctColumn:
+        stepsToMoveY = foundY - correctColumn
 
-    # pos of 1 is always [0,0]
-    stepsToMoveY = foundY - positionOf1[1]
+        # rotate to correct column
+        while stepsToMoveY > 1:
+            columnToRotateAround = foundY - 1 
+            rotateAroundColumn(columnToRotateAround)
+            print("Moved "+numberToMove+" up 1 step")
+            printMatrix()
+            foundX, foundY = findNumber(numberToMove)
+            stepsToMoveY = foundY - correctColumn
 
-    # rotate to correct column + 1
-    while stepsToMoveY > 2:
-        columnToRotateAround = foundY - 1 
+        # rotate to correct column
+        columnToRotateAround = foundY
         rotateAroundColumn(columnToRotateAround)
-        print("Moved 7 up 1 step")
+        print("Moved "+numberToMove+" to final position")
         printMatrix()
-        foundX, foundY = findNumber("07")
-        stepsToMoveY = foundY - positionOf1[1]
-    
-    # rotate to correct column
-    columnToRotateAround = foundY
-    rotateAroundColumn(columnToRotateAround)
-    print("Moved 7 to final position")
-    printMatrix()
+
+# move 7 to correct column 
+moveToCorrectColumn("07", 1) 
+
+# move 13 to correct column
+moveToCorrectColumn("13", 2)      
