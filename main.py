@@ -125,29 +125,23 @@ for fixRow in range(0, len(fixRows)):
         print("Moved "+numberToFind+" to: [6,"+str(fixRow+1)+"]\n")
         printMatrix()
 
+def findNumber(numberToFind):
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[i])):
+            if matrix[i][j] == numberToFind:
+                foundX = j
+                foundY = i
+                print(numberToFind + " found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
+                return foundX, foundY
+
 # find 1
-for i in range(0, len(matrix)):
-    for j in range(0, len(matrix[i])):
-        if matrix[i][j] == "01":
-            foundX = j
-            foundY = i
-            print("01 found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
-            break
+foundX, foundY = findNumber("01")
 
 # move to correct row
 if foundY != 0:
     moveRowUp(0, foundY)
     print("Moved 01 to: [1,1]\n")
     printMatrix()
-
-# find 7
-for i in range(0, len(matrix)):
-    for j in range(0, len(matrix[i])):
-        if matrix[i][j] == "07":
-            foundX = j
-            foundY = i
-            print("07 found at: ["+str(foundX+1) +","+ str(foundY+1) + "]\n")
-            break
 
 def rotateAroundColumn(columnToRotateAround):
     
@@ -163,6 +157,12 @@ def rotateAroundColumn(columnToRotateAround):
 
 printMatrix()
 
-rotateAroundColumn(1)
+# find 7
+foundX, foundY = findNumber("07")
 
-printMatrix()
+# # pos of 1 is always [0,0]
+# stepsToMoveY = foundY - 0
+
+# while stepsToMoveY > 1:
+
+
