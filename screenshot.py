@@ -5,7 +5,7 @@ from PIL import Image
 
 class Screenshot():
     
-    def __init__(self, grid=5):
+    def __init__(self, grid=6):
         self.window = gw.getWindowsWithTitle("BlueStacks App Player")[0]
         self.grid = grid
 

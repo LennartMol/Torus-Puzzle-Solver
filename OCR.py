@@ -4,7 +4,7 @@ import pytesseract
 
 class OCR():
     
-    def __init__(self, grid=5):
+    def __init__(self, grid=6):
         self.grid = grid
         self.number_detected_list = []
 
