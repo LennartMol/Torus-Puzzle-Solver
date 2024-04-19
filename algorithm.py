@@ -1,4 +1,5 @@
 import random as random
+import mover
 
 class TorusAlgorithm(): 
 
@@ -10,7 +11,10 @@ class TorusAlgorithm():
         else:
             self.matrix = self.addZerosToMatrix(matrix)
 
-        self.moves_list = []
+        self.mover = mover.Mover()
+        self.mover.getWindowCoordinates()
+        self.mover.getColumnCoordinates()  
+        self.mover.getRowCoordinates() 
 
         
 
@@ -35,7 +39,7 @@ class TorusAlgorithm():
         return matrix
     
     def moveRowUp(self, row, moves):
-        self.moves_list.append("moveRowUp, row: "+str(row)+", moves: "+str(moves))
+        self.mover.moveRowUp(row, moves)
         for noMoves in range(0, moves):
             temp = self.matrix[0][row]
             for i in range(0, len(self.matrix)-1):
@@ -43,7 +47,7 @@ class TorusAlgorithm():
             self.matrix[len(self.matrix)-1][row] = temp
     
     def moveRowDown(self, row, moves):
-        self.moves_list.append("moveRowDown, row: "+str(row)+", moves: "+str(moves))
+        self.mover.moveRowDown(row, moves)
         for noMoves in range(0, moves):
             temp = self.matrix[len(self.matrix)-1][row]
             for i in range(len(self.matrix)-1, 0, -1):
@@ -51,7 +55,7 @@ class TorusAlgorithm():
             self.matrix[0][row] = temp
     
     def moveColumnLeft(self, column, moves):
-        self.moves_list.append("moveColumnLeft, column: "+str(column)+", moves: "+str(moves))
+        self.mover.moveColumnLeft(column, moves)
         for noMoves in range(0, moves):
             temp = self.matrix[column][0]
             for i in range(0, len(self.matrix)-1):
@@ -59,7 +63,7 @@ class TorusAlgorithm():
             self.matrix[column][len(self.matrix)-1] = temp
 
     def moveColumnRight(self, column, moves):
-        self.moves_list.append("moveColumnRight, column: "+str(column)+", moves: "+str(moves))
+        self.mover.moveColumnRight(column, moves)
         for noMoves in range(0, moves):
             temp = self.matrix[column][len(self.matrix)-1]
             for i in range(len(self.matrix)-1, 0, -1):

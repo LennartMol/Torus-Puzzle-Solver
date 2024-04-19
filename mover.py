@@ -1,7 +1,6 @@
 import pygetwindow as gw
 import pyscreenshot as ImageGrab
 import os
-import time
 import pyautogui
 
 class Mover():
@@ -14,6 +13,7 @@ class Mover():
         self.grid = grid
         self.column_coordinates = []
         self.row_coordinates = []
+        pyautogui.PAUSE = 0.01685
 
     def getWindowCoordinates(self):
         self.x1, self.y1, self.x2, self.y2 = self.window.left, self.window.top, self.window.left + self.window.width, self.window.top + self.window.height
@@ -46,14 +46,14 @@ class Mover():
         for noMoves in range(0, moves):
             pyautogui.moveTo(self.column_coordinates[column][0], self.column_coordinates[column][1])
             pyautogui.mouseDown(button='left')
-            pyautogui.moveTo(self.column_coordinates[column][0] + (self.width/self.grid), self.column_coordinates[column][1])
+            pyautogui.moveTo(self.column_coordinates[column][0] + (self.width/self.grid/2), self.column_coordinates[column][1])
             pyautogui.mouseUp(button='left')
 
     def moveRowUp(self, row=0, moves=1):
         for noMoves in range(0, moves):
             pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1])
             pyautogui.mouseDown(button='left')
-            pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1] - (self.height/self.grid))
+            pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1] - (self.height/self.grid/2))
             pyautogui.mouseUp(button='left')
     
     def moveRowDown(self, row=0, moves=1):
