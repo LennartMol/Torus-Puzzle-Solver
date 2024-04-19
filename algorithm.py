@@ -8,7 +8,8 @@ class TorusAlgorithm():
             self.matrix = self.createExampleMatrix(self.grid)
             self.matrix = self.randomizeMatrix(self.matrix)
         else:
-            self.matrix = matrix
+            self.matrix = self.addZerosToMatrix(matrix)
+
         
 
     def createExampleMatrix(self, grid):
@@ -19,12 +20,16 @@ class TorusAlgorithm():
             for j in range(0, grid):
                 column.append(str(i*grid+j+1))
             matrix.append(column)
+        matrix = self.addZerosToMatrix(matrix)
+
+        return matrix
+    
+    def addZerosToMatrix(self, matrix):
         # if number is less than 10, add 0 in front
         for i in range(0, len(matrix)):
             for j in range(0, len(matrix[i])):
                 if int(matrix[i][j]) < 10:
                     matrix[i][j] = "0" + matrix[i][j]
-
         return matrix
     
     def moveRowUp(self, row, moves):
