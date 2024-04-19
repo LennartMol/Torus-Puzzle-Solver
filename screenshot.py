@@ -1,13 +1,18 @@
 import pyscreenshot as ImageGrab
 import pygetwindow as gw
+import os
 
-if __name__ == "__main__": 
-    # Get the window with the title "Your Window Title"
-    window = gw.getWindowsWithTitle("BlueStacks App Player")[0]
+class Screenshot():
+    
+    def __init__(self):
+        self.window = gw.getWindowsWithTitle("BlueStacks App Player")[0]
 
-    # Get the window coordinates
-    x1, y1, x2, y2 = window.left, window.top, window.left + window.width, window.top + window.height
+    def getWindowCoordinates(self):
+        self.x1, self.y1, self.x2, self.y2 = self.window.left, self.window.top, self.window.left + self.window.width, self.window.top + self.window.height
 
-    # Capture the specified window
-    im = ImageGrab.grab(bbox=(int(x1+window.width*0.04), int(y1+window.height*0.31), int(x2-window.width*0.075), int(y2-window.height*0.18)))
-    im.show()
+    def takeScreenshot(self):
+        # Capture the specified window
+        im = ImageGrab.grab(bbox=(int(self.x1+self.window.width*0.04), int(self.y1+self.window.height*0.31), int(self.x2-self.window.width*0.075), int(self.y2-self.window.height*0.18)))
+        
+        image_save_path = os.getcwd() + '\Images\\'
+        im.save(image_save_path + 'Torus.PNG')
