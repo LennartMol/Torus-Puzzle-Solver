@@ -5,8 +5,9 @@ from PIL import Image
 
 class Screenshot():
     
-    def __init__(self):
+    def __init__(self, grid=5):
         self.window = gw.getWindowsWithTitle("BlueStacks App Player")[0]
+        self.grid = grid
 
     def getWindowCoordinates(self):
         self.x1, self.y1, self.x2, self.y2 = self.window.left, self.window.top, self.window.left + self.window.width, self.window.top + self.window.height
@@ -18,19 +19,19 @@ class Screenshot():
         image_save_path = os.getcwd() + '\Images\\'
         im.save(image_save_path + 'Torus.PNG')
 
-    def takeScreenshotParts(self, grid):
+    def takeScreenshotParts(self):
         image_save_path = os.getcwd() + '\Images\\Torus.PNG'
 
         im = Image.open(image_save_path)
         
         width, height = im.size
 
-        part_width = width // grid
-        part_height = height // grid
+        part_width = width // self.grid
+        part_height = height // self.grid
 
         coordinates = []
-        for i in range(0, grid):
-            for j in range(0, grid):
+        for i in range(0, self.grid):
+            for j in range(0, self.grid):
                 x1 = j * part_width + part_width*0.25
                 y1 = i * part_height + part_height*0.25
                 x2 = x1 + part_width - part_width*0.5

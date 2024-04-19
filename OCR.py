@@ -1,21 +1,38 @@
 from PIL import Image
 import os
-
 import pytesseract
 
-grid = 5
+class OCR():
+    
+    def __init__(self, grid=5):
+        self.grid = grid
+        self.number_detected_list = []
 
-path_to_image_parts = os.getcwd() + '\Images\\'
+    def detectNumbers(self):
+        path_to_image_parts = os.getcwd() + '\Images\\'
 
-path_to_image_list = []
-for image_nr in range(1, grid*grid+1):
-    path_to_image_list.append(path_to_image_parts + str(image_nr) + '.PNG')
+        path_to_image_list = []
+        for image_nr in range(1, self.grid*self.grid+1):
+            path_to_image_list.append(path_to_image_parts + str(image_nr) + '.PNG')
 
-number_detected_list = []
+        for path in path_to_image_list:
+            self.number_detected_list.append(pytesseract.image_to_string(Image.open(path), config="--psm 10"))
 
-for path in path_to_image_list:
-    number_detected_list.append(pytesseract.image_to_string(Image.open(path), config="--psm 0"))
+        # print each detected number with each image path
+        for i in range(len(self.number_detected_list)):
+            print(path_to_image_list[i] + ' : ' + self.number_detected_list[i])
 
-# print each detected number with each image path
-for i in range(len(number_detected_list)):
-    print(path_to_image_list[i] + ' : ' + number_detected_list[i])
+    def createMatrix(self):
+        matrix = []
+        for i in range(0, self.grid):
+            column = []
+            for j in range(0, self.grid):
+                column.append(self.number_detected_list[i*self.grid+j])
+            matrix.append(column)
+        # remove \n from each element
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[i])):
+                matrix[i][j] = matrix[i][j].replace('\n', '')
+        return matrix
+
+
