@@ -1,6 +1,7 @@
 import pyscreenshot as ImageGrab
 import pygetwindow as gw
 import os
+from PIL import Image
 
 class Screenshot():
     
@@ -16,3 +17,27 @@ class Screenshot():
         
         image_save_path = os.getcwd() + '\Images\\'
         im.save(image_save_path + 'Torus.PNG')
+
+    def takeScreenshotParts(self, grid):
+        image_save_path = os.getcwd() + '\Images\\Torus.PNG'
+
+        im = Image.open(image_save_path)
+        
+        width, height = im.size
+
+        part_width = width // grid
+        part_height = height // grid
+
+        coordinates = []
+        for i in range(0, grid):
+            for j in range(0, grid):
+                x1 = j * part_width + part_width*0.25
+                y1 = i * part_height + part_height*0.25
+                x2 = x1 + part_width - part_width*0.5
+                y2 = y1 + part_height - part_height*0.5
+                coordinates.append((x1, y1, x2, y2))
+
+        for i, coord in enumerate(coordinates):
+            x1, y1, x2, y2 = coord
+            im.crop((x1, y1, x2, y2)).save(os.getcwd() + '\Images\\' + str(i+1) + '.PNG')
+        
