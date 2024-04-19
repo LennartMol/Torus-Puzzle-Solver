@@ -22,5 +22,9 @@ if __name__ == "__main__":
     mover.getWindowCoordinates()
     mover.getColumnCoordinates()  
     mover.getRowCoordinates() 
-    mover.checkCoordinates()
+    # mover.checkCoordinates()
+    mover.moveColumnLeft(column=1, moves=2)
+    mover.moveColumnRight(column=0, moves=2)
+    mover.moveRowUp(row=0, moves=3)
+    mover.moveRowDown(row=0, moves=2)
     one = 1
