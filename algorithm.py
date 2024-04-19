@@ -10,6 +10,8 @@ class TorusAlgorithm():
         else:
             self.matrix = self.addZerosToMatrix(matrix)
 
+        self.moves_list = []
+
         
 
     def createExampleMatrix(self, grid):
@@ -33,6 +35,7 @@ class TorusAlgorithm():
         return matrix
     
     def moveRowUp(self, row, moves):
+        self.moves_list.append("moveRowUp, row: "+str(row)+", moves: "+str(moves))
         for noMoves in range(0, moves):
             temp = self.matrix[0][row]
             for i in range(0, len(self.matrix)-1):
@@ -40,6 +43,7 @@ class TorusAlgorithm():
             self.matrix[len(self.matrix)-1][row] = temp
     
     def moveRowDown(self, row, moves):
+        self.moves_list.append("moveRowDown, row: "+str(row)+", moves: "+str(moves))
         for noMoves in range(0, moves):
             temp = self.matrix[len(self.matrix)-1][row]
             for i in range(len(self.matrix)-1, 0, -1):
@@ -47,6 +51,7 @@ class TorusAlgorithm():
             self.matrix[0][row] = temp
     
     def moveColumnLeft(self, column, moves):
+        self.moves_list.append("moveColumnLeft, column: "+str(column)+", moves: "+str(moves))
         for noMoves in range(0, moves):
             temp = self.matrix[column][0]
             for i in range(0, len(self.matrix)-1):
@@ -54,6 +59,7 @@ class TorusAlgorithm():
             self.matrix[column][len(self.matrix)-1] = temp
 
     def moveColumnRight(self, column, moves):
+        self.moves_list.append("moveColumnRight, column: "+str(column)+", moves: "+str(moves))
         for noMoves in range(0, moves):
             temp = self.matrix[column][len(self.matrix)-1]
             for i in range(len(self.matrix)-1, 0, -1):
