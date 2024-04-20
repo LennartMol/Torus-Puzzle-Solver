@@ -2,6 +2,7 @@ import pyscreenshot as ImageGrab
 import pygetwindow as gw
 import os
 from PIL import Image
+import PIL.ImageOps
 
 class Screenshot():
     
@@ -23,6 +24,7 @@ class Screenshot():
         image_save_path = os.getcwd() + '\Images\\Torus.PNG'
 
         im = Image.open(image_save_path)
+        im = PIL.ImageOps.invert(im)
         
         width, height = im.size
 
@@ -32,10 +34,10 @@ class Screenshot():
         coordinates = []
         for i in range(0, self.grid):
             for j in range(0, self.grid):
-                x1 = j * part_width + part_width*0.25
-                y1 = i * part_height + part_height*0.25
-                x2 = x1 + part_width - part_width*0.5
-                y2 = y1 + part_height - part_height*0.5
+                x1 = j * part_width + part_width*0.37
+                y1 = i * part_height + part_height*0.37
+                x2 = x1 + part_width - part_width*0.7
+                y2 = y1 + part_height - part_height*0.7
                 coordinates.append((x1, y1, x2, y2))
 
         for i, coord in enumerate(coordinates):
