@@ -32,7 +32,7 @@ class Mover():
 
     def getRowCoordinates(self):
         first_row_x = int(self.bbox[0] + self.width/self.grid/2)
-        first_row_y = int(self.bbox[1] + self.height * 0.5)
+        first_row_y = int(self.bbox[1] + self.height / self.grid / 2)
         self.row_coordinates.append((first_row_x, first_row_y))
 
     def moveColumnLeft(self, column=0, moves=1):
@@ -48,19 +48,18 @@ class Mover():
         pyautogui.mouseUp(button='left')
 
     def moveRowUp(self, row=0, moves=1):
-        for noMoves in range(0, moves):
-            pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1])
-            pyautogui.mouseDown(button='left')
-            pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1] - (self.height/self.grid/2))
-            pyautogui.mouseUp(button='left')
+        pyautogui.moveTo(self.row_coordinates[row][0], (self.height - (self.height/self.grid)) + self.row_coordinates[row][1])
+        pyautogui.mouseDown(button='left')
+        pyautogui.moveTo(self.row_coordinates[row][0], (self.height - (self.height/self.grid)) + self.row_coordinates[row][1] - (self.height/self.grid*moves))
+        pyautogui.mouseUp(button='left')
+                
     
     def moveRowDown(self, row=0, moves=1):
-        for noMoves in range(0, moves):
-            pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1])
-            pyautogui.mouseDown(button='left')
-            pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1] + (self.height/self.grid))
-            pyautogui.mouseUp(button='left')
-    
+        pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1])
+        pyautogui.mouseDown(button='left')
+        pyautogui.moveTo(self.row_coordinates[row][0], self.row_coordinates[row][1] + (self.height/self.grid*moves))
+        pyautogui.mouseUp(button='left')
+
     def checkCoordinates(self):
         image = 1
         image_save_path = os.getcwd() + '\Images\\'
