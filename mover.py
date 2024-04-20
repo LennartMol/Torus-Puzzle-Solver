@@ -13,7 +13,7 @@ class Mover():
         self.grid = grid
         self.column_coordinates = []
         self.row_coordinates = []
-        pyautogui.PAUSE = 0.01685
+        pyautogui.PAUSE = 0.016
 
     def getWindowCoordinates(self):
         self.x1, self.y1, self.x2, self.y2 = self.window.left, self.window.top, self.window.left + self.window.width, self.window.top + self.window.height
