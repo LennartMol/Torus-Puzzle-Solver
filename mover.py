@@ -22,7 +22,7 @@ class Mover():
         self.width = self.bbox[2] - self.bbox[0]
 
     def getColumnCoordinates(self):
-        first_column_x = int(self.bbox[0] + self.width * 0.5)
+        first_column_x = int(self.bbox[0] + (self.width - self.width / self.grid / 2))
         first_column_y = int(self.bbox[1] + self.height/self.grid/2)
         self.column_coordinates.append((first_column_x, first_column_y))
         for i in range(1, self.grid):
@@ -36,18 +36,16 @@ class Mover():
         self.row_coordinates.append((first_row_x, first_row_y))
 
     def moveColumnLeft(self, column=0, moves=1):
-        for noMoves in range(0, moves):
-            pyautogui.moveTo(self.column_coordinates[column][0], self.column_coordinates[column][1])
-            pyautogui.mouseDown(button='left')
-            pyautogui.moveTo(self.column_coordinates[column][0] - (self.width/self.grid), self.column_coordinates[column][1])
-            pyautogui.mouseUp(button='left')
+        pyautogui.moveTo(self.column_coordinates[column][0], self.column_coordinates[column][1])
+        pyautogui.mouseDown(button='left')
+        pyautogui.moveTo(self.column_coordinates[column][0] - (self.width/self.grid*moves), self.column_coordinates[column][1])
+        pyautogui.mouseUp(button='left')
     
     def moveColumnRight(self, column=0, moves=1):
-        for noMoves in range(0, moves):
-            pyautogui.moveTo(self.column_coordinates[column][0], self.column_coordinates[column][1])
-            pyautogui.mouseDown(button='left')
-            pyautogui.moveTo(self.column_coordinates[column][0] + (self.width/self.grid/2), self.column_coordinates[column][1])
-            pyautogui.mouseUp(button='left')
+        pyautogui.moveTo(self.column_coordinates[column][0] - (self.width - (self.width/self.grid)), self.column_coordinates[column][1])
+        pyautogui.mouseDown(button='left')
+        pyautogui.moveTo(self.column_coordinates[column][0] - (self.width - (self.width/self.grid)) + (self.width/self.grid*moves), self.column_coordinates[column][1])
+        pyautogui.mouseUp(button='left')
 
     def moveRowUp(self, row=0, moves=1):
         for noMoves in range(0, moves):
